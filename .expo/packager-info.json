@@ -2,8 +2,8 @@
   "devToolsPort": 19002,
   "expoServerPort": 19000,
   "packagerPort": 19001,
-  "packagerPid": 2777,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "packagerPid": 4454,
+  "expoServerNgrokUrl": "https://7b-9e5.anonymous.cookbook.exp.direct",
+  "packagerNgrokUrl": "https://packager.7b-9e5.anonymous.cookbook.exp.direct",
+  "ngrokPid": 4464
 }
