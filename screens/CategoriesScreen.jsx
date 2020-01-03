@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Text, FlatList, TouchableOpacity } from 'react-native';
 import { CATEGORIES } from '../data/categories';
-import Colors from '../constants/Colors'
 
 const CategoriesScreen = props => {
 
@@ -36,12 +35,11 @@ const CategoriesScreen = props => {
   )
 }
 
+// This is used for navigation configuration once
+// The object has been initialized
+// Setting it as a key value is used for static configuration
 CategoriesScreen.navigationOptions = {
-  headerTitle: 'Meal Categories',
-  headerStyle: {
-    backgroundColor: ''
-  },
-  headerTintColor: Colors.primaryColor
+  headerTitle: 'Meal Categories'
 }
 
 const styles = StyleSheet.create({

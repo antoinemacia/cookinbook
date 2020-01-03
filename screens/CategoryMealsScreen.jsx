@@ -8,19 +8,25 @@ const CategoryMealsScreen = props => {
 
   return (
     <View style={styles.screen}>
-      <Text>{category.title}</Text>
-      <Button
-        title="Go to Details"
-        onPress={() => {
-          props.navigation.navigate({ routeName: 'MealDetail' })
-        }}
-      />
       <Button
         title="Go Back"
         onPress={() => { props.navigation.goBack()}}
       />
     </View>
   )
+}
+
+// This is used for DYNAMIC navigation configuration once
+// The object has been initialized
+// Setting the configurarion as a function allows access
+// to the navigationData object and allow dynamic config setting
+CategoryMealsScreen.navigationOptions = navigationData => {
+  const catId = navigationData.navigation.getParam('categoryId');
+  const category = CATEGORIES.find(cat => catId === cat.id)
+
+  return {
+    headerTitle: category.title
+  }
 }
 
 const styles = StyleSheet.create({
