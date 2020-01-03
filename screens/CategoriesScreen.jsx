@@ -1,27 +1,8 @@
 import React from 'react';
-import { View, StyleSheet, Text, FlatList, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Text, FlatList, TouchableOpacity, TouchableNativeFeedback } from 'react-native';
 import { CATEGORIES } from '../data/categories';
 
 const CategoriesScreen = props => {
-
-  const Category = (props) => {
-    return (
-      <TouchableOpacity
-        style={styles.category}
-        onPress={() => {
-          props.navigation.navigate({
-            routeName: 'CategoryMeals',
-            params: {
-              categoryId: props.item.id
-            }
-          })
-        }}>
-        <View>
-          <Text>{props.item.title}</Text>
-        </View>
-      </TouchableOpacity>
-    )
-  }
 
   return (
     <View style={styles.screen}>
@@ -32,6 +13,25 @@ const CategoriesScreen = props => {
         keyExtractor={item => item.id}
       />
     </View>
+  )
+}
+
+const Category = props => {
+  return (
+    <TouchableOpacity
+      style={styles.category}
+      onPress={() => {
+        props.navigation.navigate({
+          routeName: 'CategoryMeals',
+          params: {
+            categoryId: props.item.id
+          }
+        })
+      }}>
+      <View style={{...styles.categoryGrid, ...{backgroundColor: props.item.color}}}>
+        <Text style={styles.categoryTitle}>{props.item.title}</Text>
+      </View>
+    </TouchableOpacity>
   )
 }
 
@@ -50,7 +50,25 @@ const styles = StyleSheet.create({
   category: {
     flex: 1,
     margin: 15,
-    height: 250
+    height: 150
+  },
+  categoryGrid: {
+    flex: 1,
+    borderRadius: 10,
+    padding: 15,
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
+    // shadow styles is iOS only
+    shadowColor: 'black',
+    shadowOpacity: 0.26,
+    shadowOffset: {width: 0, height: 2},
+    shadowRadius: 10,
+    // elevation is Android only (same as shadow)
+    elevation: 3
+  },
+  categoryTitle: {
+    fontFamily: 'open-sans-bold',
+    fontSize: 15
   }
 });
 
