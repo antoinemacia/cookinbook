@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, Button, Text } from 'react-native';
 import { MEALS } from '../data/meals';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
-import { CustomHeaderButton } from '../components/HeaderButton'
+import CustomHeaderButton from '../components/CustomHeaderButton'
 
 const MealDetailScreen = props => {
   return (
@@ -33,7 +33,7 @@ MealDetailScreen.navigationOptions = navigationData => {
     headerRight: () => <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
       <Item
         title="Favorite"
-        iconName="md-star"
+        iconName="ios-star"
         onPress={() => { console.log()}}
       />
     </HeaderButtons>
