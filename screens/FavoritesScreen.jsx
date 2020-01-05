@@ -21,9 +21,15 @@ const FavoritesScreen = props => {
 
 // This is used for navigation configuration once
 // The object has been initialized
-// Setting it as a key value is used for static configuration
-FavoritesScreen.navigationOptions = {
-  headerTitle: 'Your Favorites'
+FavoritesScreen.navigationOptions = ({ navigation }) => {
+  return {
+    headerTitle: 'Meal Categories',
+    headerLeft: () => {
+      return <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+        <Item title="menu" iconName="ios-menu" onPress={() => navigation.toggleDrawer()}></Item>
+      </HeaderButtons>
+    }
+  }
 }
 
 

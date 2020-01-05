@@ -9,6 +9,19 @@ const FiltersScreen = props => {
   )
 }
 
+// This is used for navigation configuration once
+// The object has been initialized
+FiltersScreen.navigationOptions = ({ navigation }) => {
+  return {
+    headerTitle: 'Filter Meals',
+    headerLeft: () => {
+      return <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+        <Item title="menu" iconName="ios-menu" onPress={() => navigation.toggleDrawer()}></Item>
+      </HeaderButtons>
+    }
+  }
+}
+
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
