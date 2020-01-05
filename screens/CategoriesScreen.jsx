@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, FlatList, TouchableOpacity, TouchableNativeFeed
 import { CATEGORIES } from '../data/categories';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import CustomHeaderButton from '../components/CustomHeaderButton';
+import BodyText from '../components/BodyText';
 const CategoriesScreen = props => {
 
   return (
@@ -30,7 +31,7 @@ const Category = props => {
         })
       }}>
       <View style={{...styles.categoryGrid, ...{backgroundColor: props.item.color}}}>
-        <Text style={styles.categoryTitle}>{props.item.title}</Text>
+        <BodyText style={styles.categoryTitle}>{props.item.title}</BodyText>
       </View>
     </TouchableOpacity>
   )

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { TouchableOpacity, StyleSheet, View, ImageBackground, Text  } from 'react-native';
+import BodyText from './BodyText';
 
 const MealGridItem = props => {
   return (
@@ -22,8 +23,8 @@ const MealGridItem = props => {
           </ImageBackground>
         </View>
         <View style={{ ...styles.mealRow, ...styles.mealDetail }}>
-          <Text>{props.meal.duration} minutes</Text>
-          <Text>{props.meal.complexity.toUpperCase()}</Text>
+          <BodyText>{props.meal.duration} minutes</BodyText>
+          <BodyText>{props.meal.complexity.toUpperCase()}</BodyText>
         </View>
       </View>
     </TouchableOpacity>
