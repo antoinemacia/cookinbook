@@ -1,14 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { View, StyleSheet, Text, Switch } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import CustomHeaderButton from '../components/CustomHeaderButton';
 import Colors from '../constants/Colors'
 
 const FiltersScreen = props => {
+  const { navigation } = props;
   const [glutenFreeFilter, setGlutenFreeFilter] = useState(false)
   const [lactoseFreeFilter, setLactoseFreeFilter] = useState(false)
   const [veganFilter, setVeganFilter] = useState(false)
   const [vegetarianFilter, setVegetarianFilter] = useState(false)
+
+  // useCallback avoids re-creating the function unneccessarily on re-renders
+  // the function here will only be re-created if the dependecies
+  // have changed.
+  // useEffect() allows you to register a function which executes
+  // AFTER the current render cycle.
+  // https://reactjs.org/docs/hooks-reference.html#usecallback
+  const saveFilters = useCallback(() => {
+    const appliedFilters = {
+      glutenFree: glutenFreeFilter,
+      lactoseFree: lactoseFreeFilter,
+      vegan: veganFilter,
+      vegetarian: vegetarianFilter
+    }
+
+    return appliedFilters
+    // The second argument array is for DEPENDENCIES
+    // Meaning this hook will trigger on re-renders
+    // only if the dependencies bellow have changed
+  }, [glutenFreeFilter, lactoseFreeFilter, veganFilter, vegetarianFilter])
+
+  // This hook is used to persist the state stored in the navigation params
+  // https://reactjs.org/docs/hooks-reference.html#useeffect
+  useEffect(() => {
+    props.navigation.setParams({
+      save: saveFilters
+    })
+    // The second argument array is for DEPENDENCIES
+    // Meaning this hook will trigger on re-renders
+    // only if the dependencies bellow have changed
+  }, [saveFilters])
 
   return (
     <View style={styles.screen}>
@@ -43,6 +75,16 @@ FiltersScreen.navigationOptions = ({ navigation }) => {
       return <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
         <Item title="menu" iconName="ios-menu" onPress={() => navigation.toggleDrawer()}></Item>
       </HeaderButtons>
+    },
+    headerRight: () => {
+      return <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+        <Item
+          title="menu"
+          iconName="ios-save"
+          onPress={() => {
+            navigation.getParam('save')
+          }} />
+      </HeaderButtons>
     }
   }
 }
@@ -62,7 +104,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    width: '80%'
+    width: '80%',
+    marginVertical: 20
   }
 });
 
