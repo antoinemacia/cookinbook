@@ -2,6 +2,8 @@ import React from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
 import { MEALS } from '../data/meals';
 import MealGridItem from '../components/MealGridItem';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+import CustomHeaderButton from '../components/CustomHeaderButton';
 
 const FavoritesScreen = props => {
 
