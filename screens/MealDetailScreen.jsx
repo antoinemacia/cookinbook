@@ -1,13 +1,11 @@
 import React from 'react';
 import { ScrollView, View, StyleSheet, Button, Image } from 'react-native';
-import { MEALS } from '../data/meals';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 import CustomHeaderButton from '../components/CustomHeaderButton'
 import BodyText from '../components/BodyText';
 
 const MealDetailScreen = props => {
-  const mealId = props.navigation.getParam('mealId');
-  const meal = MEALS.find(meal => mealId === meal.id)
+  const meal = props.navigation.getParam('meal');
 
   return (
     <ScrollView>
@@ -49,8 +47,7 @@ const MealDetailScreen = props => {
 // Setting the configurarion as a function allows access
 // to the navigationData object and allow dynamic config setting
 MealDetailScreen.navigationOptions = navigationData => {
-  const mealId = navigationData.navigation.getParam('mealId');
-  const meal = MEALS.find(meal => mealId === meal.id)
+  const meal = navigationData.navigation.getParam('meal');
 
   return {
     // Device header

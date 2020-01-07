@@ -5,7 +5,6 @@ import CustomHeaderButton from '../components/CustomHeaderButton';
 import Colors from '../constants/Colors'
 
 const FiltersScreen = props => {
-  const { navigation } = props;
   const [glutenFreeFilter, setGlutenFreeFilter] = useState(false)
   const [lactoseFreeFilter, setLactoseFreeFilter] = useState(false)
   const [veganFilter, setVeganFilter] = useState(false)

@@ -12,7 +12,7 @@ const MealGridItem = props => {
         props.navigation.navigate({
           routeName: 'MealDetail',
           params: {
-            mealId: props.meal.id
+            meal: props.meal
           }
         })
       }}>

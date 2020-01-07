@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text, FlatList, TouchableOpacity, TouchableNativeFeedback } from 'react-native';
+import { View, StyleSheet, FlatList, TouchableOpacity, TouchableNativeFeedback } from 'react-native';
 import { CATEGORIES } from '../data/categories';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import CustomHeaderButton from '../components/CustomHeaderButton';

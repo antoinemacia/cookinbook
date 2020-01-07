@@ -1,13 +1,13 @@
 import React from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
-import { MEALS } from '../data/meals';
+import { useSelector } from 'react-redux'
 import MealGridItem from '../components/MealGridItem';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import CustomHeaderButton from '../components/CustomHeaderButton';
 
 const FavoritesScreen = props => {
 
-  const favoriteMeals = MEALS.filter(meal => meal.id === 'm1')
+  const favoriteMeals = useSelector(state => state.meals.favoriteMeals)
 
   return (
     <View style={styles.screen}>
