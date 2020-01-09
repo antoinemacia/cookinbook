@@ -4,11 +4,16 @@ import { useSelector } from 'react-redux'
 import MealGridItem from '../components/MealGridItem';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import CustomHeaderButton from '../components/CustomHeaderButton';
+import BodyText from '../components/BodyText';
 
 const FavoritesScreen = props => {
-
   const favoriteMeals = useSelector(state => state.meals.favoriteMeals)
 
+  if (favoriteMeals.length === 0 || !favoriteMeals) {
+    return <View style={styles.screen}>
+      <BodyText>No favorite meals found.</BodyText>
+    </View>
+  }
   return (
     <View style={styles.screen}>
       <FlatList
