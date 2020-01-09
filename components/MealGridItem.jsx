@@ -3,8 +3,11 @@
 import React from 'react';
 import { TouchableOpacity, StyleSheet, View, ImageBackground, Text  } from 'react-native';
 import BodyText from './BodyText';
+import { useSelector } from 'react-redux'
 
 const MealGridItem = props => {
+  const favoriteMeals = useSelector(state => state.meals.favoriteMeals)
+
   return (
     <TouchableOpacity
       style={styles.meal}
@@ -12,7 +15,8 @@ const MealGridItem = props => {
         props.navigation.navigate({
           routeName: 'MealDetail',
           params: {
-            meal: props.meal
+            meal: props.meal,
+            isFavorite: favoriteMeals.some(favMeal => favMeal.id === props.meal.id)
           }
         })
       }}>

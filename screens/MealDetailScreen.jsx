@@ -8,7 +8,7 @@ import { toggleFavorite } from '../store/actions/meals';
 
 const MealDetailScreen = props => {
   const meal = props.navigation.getParam('meal');
-
+  const favoriteMeals = useSelector(state => state.meals.favoriteMeals)
   const dispatch = useDispatch();
 
   const toggleFavoriteHandler = useCallback(() => {
@@ -17,12 +17,18 @@ const MealDetailScreen = props => {
 
   useEffect(() => {
     props.navigation.setParams({
-      toggleFav: toggleFavoriteHandler
+      toggleFav: toggleFavoriteHandler,
     })
     // The second argument array is for DEPENDENCIES
     // Meaning this hook will trigger on re-renders
     // only if the dependencies bellow have changed
-  }, [toggleFavoriteHandler])
+  }, [toggleFavoriteHandler, favoriteMeals, meal])
+
+  useEffect(() => {
+    props.navigation.setParams({
+      isFavorite: favoriteMeals.some(favMeal => favMeal.id === meal.id)
+    })
+  }, [favoriteMeals, meal])
 
   return (
     <ScrollView>
@@ -66,6 +72,8 @@ const MealDetailScreen = props => {
 MealDetailScreen.navigationOptions = navigationData => {
   const meal = navigationData.navigation.getParam('meal');
   const toggleFav = navigationData.navigation.getParam('toggleFav');
+  const isFavorite = navigationData.navigation.getParam('isFavorite');
+
 
   return {
     // Device header
@@ -74,7 +82,7 @@ MealDetailScreen.navigationOptions = navigationData => {
     headerRight: () => <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
       <Item
         title="Favorite"
-        iconName="ios-star"
+        iconName={isFavorite ? "ios-star" : "ios-star-outline"}
         onPress={toggleFav}
       />
     </HeaderButtons>
