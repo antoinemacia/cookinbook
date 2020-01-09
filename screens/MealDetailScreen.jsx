@@ -1,11 +1,28 @@
-import React from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { ScrollView, View, StyleSheet, Button, Image } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 import CustomHeaderButton from '../components/CustomHeaderButton'
 import BodyText from '../components/BodyText';
+import { useSelector, useDispatch } from 'react-redux'
+import { toggleFavorite } from '../store/actions/meals';
 
 const MealDetailScreen = props => {
   const meal = props.navigation.getParam('meal');
+
+  const dispatch = useDispatch();
+
+  const toggleFavoriteHandler = useCallback(() => {
+    dispatch(toggleFavorite(meal))
+  }, [dispatch, meal])
+
+  useEffect(() => {
+    props.navigation.setParams({
+      toggleFav: toggleFavoriteHandler
+    })
+    // The second argument array is for DEPENDENCIES
+    // Meaning this hook will trigger on re-renders
+    // only if the dependencies bellow have changed
+  }, [toggleFavoriteHandler])
 
   return (
     <ScrollView>
@@ -48,6 +65,7 @@ const MealDetailScreen = props => {
 // to the navigationData object and allow dynamic config setting
 MealDetailScreen.navigationOptions = navigationData => {
   const meal = navigationData.navigation.getParam('meal');
+  const toggleFav = navigationData.navigation.getParam('toggleFav');
 
   return {
     // Device header
@@ -57,7 +75,7 @@ MealDetailScreen.navigationOptions = navigationData => {
       <Item
         title="Favorite"
         iconName="ios-star"
-        onPress={() => { console.log()}}
+        onPress={toggleFav}
       />
     </HeaderButtons>
 
