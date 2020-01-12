@@ -43,6 +43,11 @@ const Category = props => {
 CategoriesScreen.navigationOptions = ({navigation}) => {
   return {
     headerTitle: 'Meal Categories',
+    headerRight: () => {
+      return <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+        <Item title="add-meal" iconName="ios-add" onPress={() => navigation.toggleDrawer()}></Item>
+      </HeaderButtons>
+    },
     headerLeft: () => {
       return <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
         <Item title="menu" iconName="ios-menu" onPress={() => navigation.toggleDrawer()}></Item>
