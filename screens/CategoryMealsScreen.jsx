@@ -9,7 +9,6 @@ const CategoryMealsScreen = props => {
 
   const availableMeals = useSelector(state => state.meals.filteredMeals)
   const displayedMeals = availableMeals.filter(meal => meal.categoryIds.indexOf(catId) >= 0)
-
   return (
     <View style={styles.screen}>
       <FlatList

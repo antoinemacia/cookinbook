@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback  } from 'react';
+import { useDispatch } from 'react-redux'
 import { View, StyleSheet, Text, Switch } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import CustomHeaderButton from '../components/CustomHeaderButton';
 import Colors from '../constants/Colors'
+import { setFilters } from '../store/actions/meals'
 
 const FiltersScreen = props => {
   const [glutenFreeFilter, setGlutenFreeFilter] = useState(false)
@@ -10,6 +12,7 @@ const FiltersScreen = props => {
   const [veganFilter, setVeganFilter] = useState(false)
   const [vegetarianFilter, setVegetarianFilter] = useState(false)
 
+  const dispatch = useDispatch();
   // useCallback avoids re-creating the function unneccessarily on re-renders
   // the function here will only be re-created if the dependecies
   // have changed.
@@ -24,11 +27,11 @@ const FiltersScreen = props => {
       vegetarian: vegetarianFilter
     }
 
-    return appliedFilters
+    dispatch(setFilters(appliedFilters))
     // The second argument array is for DEPENDENCIES
     // Meaning this hook will trigger on re-renders
     // only if the dependencies bellow have changed
-  }, [glutenFreeFilter, lactoseFreeFilter, veganFilter, vegetarianFilter])
+  }, [glutenFreeFilter, lactoseFreeFilter, veganFilter, vegetarianFilter, dispatch])
 
   // This hook is used to persist the state stored in the navigation params
   // https://reactjs.org/docs/hooks-reference.html#useeffect
@@ -80,9 +83,7 @@ FiltersScreen.navigationOptions = ({ navigation }) => {
         <Item
           title="menu"
           iconName="ios-save"
-          onPress={() => {
-            navigation.getParam('save')
-          }} />
+          onPress={navigation.getParam('save')} />
       </HeaderButtons>
     }
   }
