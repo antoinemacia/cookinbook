@@ -11,6 +11,7 @@ import CategoryMealsScreen from '../screens/CategoryMealsScreen';
 import CategoriesScreen from '../screens/CategoriesScreen';
 import Colors from '../constants/Colors'
 import FavoritesScreen from '../screens/FavoritesScreen';
+import NewMealScreen from '../screens/NewMealScreen';
 import FiltersScreen from '../screens/FiltersScreen';
 
 const defaultStackNavConfiguration = {
@@ -82,7 +83,13 @@ const MainNavigator = createDrawerNavigator({
       drawerLabel: 'Meals'
     }
   },
-  Filters: FiltersNavigator
+  Filters: FiltersNavigator,
+  NewMeal: {
+    screen: NewMealScreen,
+    navigationOptions: {
+      drawerLabel: 'Add Recipe'
+    }
+  }
 }, {
   contentOptions: {
     activeTintColor: Colors.secondaryColor,

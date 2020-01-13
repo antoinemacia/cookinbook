@@ -1,11 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { ScrollView, View, StyleSheet, Button, Image } from 'react-native';
+import { ScrollView, View, StyleSheet, TextInput, Button, Image } from 'react-native';
 import BodyText from '../components/BodyText';
 
 const NewMealScreen = props => {
 
   const saveMeal = useCallback(() => {
-    // TODO: Configure navigator to add this screen if needed
     // TODO: Add hooks to save form state and
     // TODO: Pass form data to Redux action
     // TODO: Success message
@@ -15,14 +14,106 @@ const NewMealScreen = props => {
     props.navigation.setParams({
       save: saveMeal
     })
-    // The second argument array is for DEPENDENCIES
-    // Meaning this hook will trigger on re-renders
-    // only if the dependencies bellow have changed
   }, [saveMeal])
 
+  this.isGlutenFree = isGlutenFree;
+  this.isVegan = isVegan;
+  this.isVegetarian = isVegetarian;
+  this.isLactoseFree = isLactoseFree;
   return (
     <ScrollView>
+      <View style={styles.details}>
+        <View style={styles.inputContainer}>
+          <BodyText style={styles.label}>Upload image</BodyText>
+          {
+            // TODO - Needs image upload
+            // <TextInput style={styles.input} />
+          }
+        </View>
 
+        <View style={styles.inputContainer}>
+          <BodyText style={styles.label}>Title</BodyText>
+          <TextInput style={styles.input} />
+        </View>
+
+        <View style={styles.inputContainer}>
+          <BodyText style={styles.label}>Categories</BodyText>
+          {
+            // TODO - Needs dropdown
+            // <TextInput style={styles.input} />
+          }
+        </View>
+
+        <View style={styles.inputContainer}>
+          <BodyText style={styles.label}>Affordability</BodyText>
+          {
+            // TODO - Needs dropdown
+            // <TextInput style={styles.input} />
+          }
+        </View>
+
+        <View style={styles.inputContainer}>
+          <BodyText style={styles.label}>Complexity</BodyText>
+          {
+            // TODO - Needs dropdown
+            // <TextInput style={styles.input} />
+          }
+        </View>
+
+        <View style={styles.inputContainer}>
+          <BodyText style={styles.label}>Duration</BodyText>
+          {
+            // TODO - Needs dropdown
+            // <TextInput style={styles.input} />
+          }
+        </View>
+
+        <View style={styles.inputContainer}>
+          <BodyText style={styles.label}>Ingredients</BodyText>
+          {
+            // TODO - Needs text input with list (Add & Delete)
+            // <TextInput style={styles.input} />
+          }
+        </View>
+
+
+        <View style={styles.inputContainer}>
+          <BodyText style={styles.label}>Steps</BodyText>
+          {
+            // TODO - Needs text input with list (Add & Delete)
+            // <TextInput style={styles.input} />
+          }
+        </View>
+
+        <View style={styles.inputContainer}>
+          <BodyText style={styles.label}>Gluten Free?</BodyText>
+          {
+            // TODO - Radio button
+          }
+        </View>
+
+        <View style={styles.inputContainer}>
+          <BodyText style={styles.label}>Lactose Free?</BodyText>
+          {
+            // TODO - Radio button
+          }
+        </View>
+
+        <View style={styles.inputContainer}>
+          <BodyText style={styles.label}>Vegetarian?</BodyText>
+          {
+            // TODO - Radio button
+          }
+        </View>
+
+        <View style={styles.inputContainer}>
+          <BodyText style={styles.label}>Vegan?</BodyText>
+          {
+            // TODO - Radio button
+          }
+        </View>
+
+      </View>
     </ScrollView>
   )
 }
