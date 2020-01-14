@@ -1,19 +1,21 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { ScrollView, View, StyleSheet, TextInput, Button, Image } from 'react-native';
+import { ScrollView, View, StyleSheet, TextInput, Switch, Button, Image } from 'react-native';
 import BodyText from '../components/BodyText';
 
 const NewMealScreen = props => {
-  const [title, setTitle] = useState(false)
-  const [categories, setCategories] = useState([])
-  const [affordability, setAffordability] = useState("")
-  const [complexity, setComplexity] = useState()
-  const [duration, setDuration] = useState(0)
-  const [ingredients, setIngredients] = useState([])
-  const [steps, setSteps] = useState([])
-  const [glutenFree, setGlutenFree] = useState(false)
-  const [lactoseFree, setLactoseFree] = useState(false)
-  const [vegan, setVegan] = useState(false)
-  const [vegetarian, setVegetarian] = useState(false)
+  const meal = props.navigation.getParam('meal');
+
+  const [title, setTitle] = useState(meal ? meal.title : false)
+  const [categories, setCategories] = useState(meal ? meal.categories : [])
+  const [affordability, setAffordability] = useState(meal ? meal.affordability : "")
+  const [complexity, setComplexity] = useState(meal ? meal.complexity : "")
+  const [duration, setDuration] = useState(meal ? meal.duration : 0)
+  const [ingredients, setIngredients] = useState(meal ? meal.ingredients : [])
+  const [steps, setSteps] = useState(meal ? meal.steps : [])
+  const [glutenFree, setGlutenFree] = useState(meal ? meal.glutenFree : false)
+  const [lactoseFree, setLactoseFree] = useState(meal ? meal.lactoseFree : false)
+  const [vegan, setVegan] = useState(meal ? meal.vegan : false)
+  const [vegetarian, setVegetarian] = useState(meal ? meal.vegetarian : false)
 
   const saveMeal = useCallback(() => {
     // TODO: Add hooks to save form state and
@@ -40,7 +42,7 @@ const NewMealScreen = props => {
 
         <View style={styles.inputContainer}>
           <BodyText style={styles.label}>Title</BodyText>
-          <TextInput style={styles.input} />
+          <TextInput style={styles.input} value={title} />
         </View>
 
         <View style={styles.inputContainer}>
@@ -94,30 +96,34 @@ const NewMealScreen = props => {
 
         <View style={styles.inputContainer}>
           <BodyText style={styles.label}>Gluten Free?</BodyText>
-          {
-            // TODO - Radio button
-          }
+          <Switch
+            value={glutenFree}
+            trackColor={{ true: Colors.primaryColor }}
+            onValueChange={setGlutenFree} />
         </View>
 
         <View style={styles.inputContainer}>
           <BodyText style={styles.label}>Lactose Free?</BodyText>
-          {
-            // TODO - Radio button
-          }
+          <Switch
+            value={lactoseFree}
+            trackColor={{ true: Colors.primaryColor }}
+            onValueChange={setLactoseFree} />
         </View>
 
         <View style={styles.inputContainer}>
           <BodyText style={styles.label}>Vegetarian?</BodyText>
-          {
-            // TODO - Radio button
-          }
+          <Switch
+            value={vegetarian}
+            trackColor={{ true: Colors.primaryColor }}
+            onValueChange={setVegetarian} />
         </View>
 
         <View style={styles.inputContainer}>
           <BodyText style={styles.label}>Vegan?</BodyText>
-          {
-            // TODO - Radio button
-          }
+          <Switch
+            value={vegan}
+            trackColor={{ true: Colors.primaryColor }}
+            onValueChange={setVegan} />
         </View>
 
       </View>
@@ -129,7 +135,7 @@ NewMealScreen.navigationOptions = ({ navigation }) => {
 
   return {
     // Device header
-    headerTitle: navigation.getParam('mealId') ? "Edit Recipe" : "Add Recipe",
+    headerTitle: navigation.getParam('meal') ? "Edit Recipe" : "Add Recipe",
     // Device top-right component (like a button)
     headerRight: () => <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
       <Item
