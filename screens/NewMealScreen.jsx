@@ -3,6 +3,17 @@ import { ScrollView, View, StyleSheet, TextInput, Button, Image } from 'react-na
 import BodyText from '../components/BodyText';
 
 const NewMealScreen = props => {
+  const [title, setTitle] = useState(false)
+  const [categories, setCategories] = useState([])
+  const [affordability, setAffordability] = useState("")
+  const [complexity, setComplexity] = useState()
+  const [duration, setDuration] = useState(0)
+  const [ingredients, setIngredients] = useState([])
+  const [steps, setSteps] = useState([])
+  const [glutenFree, setGlutenFree] = useState(false)
+  const [lactoseFree, setLactoseFree] = useState(false)
+  const [vegan, setVegan] = useState(false)
+  const [vegetarian, setVegetarian] = useState(false)
 
   const saveMeal = useCallback(() => {
     // TODO: Add hooks to save form state and
@@ -16,10 +27,6 @@ const NewMealScreen = props => {
     })
   }, [saveMeal])
 
-  this.isGlutenFree = isGlutenFree;
-  this.isVegan = isVegan;
-  this.isVegetarian = isVegetarian;
-  this.isLactoseFree = isLactoseFree;
   return (
     <ScrollView>
       <View style={styles.details}>
@@ -122,7 +129,7 @@ NewMealScreen.navigationOptions = ({ navigation }) => {
 
   return {
     // Device header
-    headerTitle: "Add Recipe",
+    headerTitle: navigation.getParam('mealId') ? "Edit Recipe" : "Add Recipe",
     // Device top-right component (like a button)
     headerRight: () => <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
       <Item
@@ -134,31 +141,22 @@ NewMealScreen.navigationOptions = ({ navigation }) => {
 }
 
 const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
   image: {
     width: '100%',
     height: 200
   },
   details: {
-    flexDirection: 'row',
-    padding: 15,
-    justifyContent: 'space-around'
+    margin: 15,
   },
   title: {
     fontFamily: 'open-sans-bold',
-    fontSize: 20,
-    textAlign: 'center'
+    marginVertical: 8
   },
-  listItem: {
-    marginVertical: 10,
-    marginHorizontal: 20,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    padding: 10
+  input: {
+    paddingHorizontal: 2,
+    paddingVertical: 5,
+    borderBottomColor: '#ccc',
+    borderBottomWidth: 1,
   }
 });
 
