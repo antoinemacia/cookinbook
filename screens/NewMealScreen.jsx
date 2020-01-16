@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { ScrollView, View, StyleSheet, TextInput, Switch, Button, Image } from 'react-native';
+import { ScrollView, View, StyleSheet, TextInput, Switch, Picker, Image } from 'react-native';
 import BodyText from '../components/BodyText';
 
 const NewMealScreen = props => {
@@ -48,25 +48,47 @@ const NewMealScreen = props => {
         <View style={styles.inputContainer}>
           <BodyText style={styles.label}>Categories</BodyText>
           {
-            // TODO - Needs dropdown
-            // <TextInput style={styles.input} />
+            // TODO - Override hook method to append to array
+            // TODO - Display result of array
           }
+          <Picker
+            selectedValue={categories}
+            style={styles.input}
+            onValueChange={setCategories}>
+            <Picker.Item label="Italian" value="c1" />
+            <Picker.Item label="Quick & Easy" value="c2" />
+            <Picker.Item label="Hamburgers" value="c3" />
+            <Picker.Item label="German" value="c4" />
+            <Picker.Item label="Light & Lovely" value="c5" />
+            <Picker.Item label="Exotic" value="c6" />
+            <Picker.Item label="Breakfast" value="c7" />
+            <Picker.Item label="Asian" value="c8" />
+            <Picker.Item label="French" value="c9" />
+            <Picker.Item label="Summer" value="c10" />
+          </Picker>
         </View>
-
         <View style={styles.inputContainer}>
           <BodyText style={styles.label}>Affordability</BodyText>
-          {
-            // TODO - Needs dropdown
-            // <TextInput style={styles.input} />
-          }
+          <Picker
+            selectedValue={affordability}
+            style={styles.input}
+            onValueChange={setAffordability}>
+            <Picker.Item label="Cheap" value="cheap" />
+            <Picker.Item label="Okay" value="okay" />
+            <Picker.Item label="Pricey" value="pricey" />
+          </Picker>
         </View>
 
         <View style={styles.inputContainer}>
           <BodyText style={styles.label}>Complexity</BodyText>
-          {
-            // TODO - Needs dropdown
-            // <TextInput style={styles.input} />
-          }
+          <Picker
+            selectedValue={complexity}
+            style={styles.input}
+            onValueChange={setComplexity}>
+            <Picker.Item label="Easy" value="easy" />
+            <Picker.Item label="Seasoned" value="seasoned" />
+            <Picker.Item label="Difficult" value="difficult" />
+          </Picker>
         </View>
 
         <View style={styles.inputContainer}>
@@ -84,7 +106,6 @@ const NewMealScreen = props => {
             // <TextInput style={styles.input} />
           }
         </View>
-
 
         <View style={styles.inputContainer}>
           <BodyText style={styles.label}>Steps</BodyText>

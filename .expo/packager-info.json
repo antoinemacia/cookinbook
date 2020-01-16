@@ -3,7 +3,7 @@
   "expoServerPort": null,
   "packagerPort": null,
   "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "expoServerNgrokUrl": "https://iz-xhb.anonymous.cookbook.exp.direct",
+  "packagerNgrokUrl": "https://packager.iz-xhb.anonymous.cookbook.exp.direct",
+  "ngrokPid": 62068
 }
