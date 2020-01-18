@@ -17,6 +17,10 @@ const NewMealScreen = props => {
   const [vegan, setVegan] = useState(meal ? meal.vegan : false)
   const [vegetarian, setVegetarian] = useState(meal ? meal.vegetarian : false)
 
+  const handleAddIngredient = (ingredient) => {
+    setIngredients([...ingredients, ingredient])
+  }
+
   const saveMeal = useCallback(() => {
     // TODO: Add hooks to save form state and
     // TODO: Pass form data to Redux action
@@ -42,19 +46,16 @@ const NewMealScreen = props => {
 
         <View style={styles.inputContainer}>
           <BodyText style={styles.label}>Title</BodyText>
-          <TextInput style={styles.input} value={title} />
+          <TextInput style={styles.input} value={title} onChangeText={setTitle}/>
         </View>
 
         <View style={styles.inputContainer}>
           <BodyText style={styles.label}>Categories</BodyText>
-          {
-            // TODO - Override hook method to append to array
-            // TODO - Display result of array
-          }
+          <ModifiableItemList items={categories} />
           <Picker
             selectedValue={categories}
             style={styles.input}
-            onValueChange={setCategories}>
+            onValueChange={(value) => { setCategories([...categories, { key: categories.length + 1, value: value }])}}>
             <Picker.Item label="Italian" value="c1" />
             <Picker.Item label="Quick & Easy" value="c2" />
             <Picker.Item label="Hamburgers" value="c3" />
@@ -93,26 +94,29 @@ const NewMealScreen = props => {
 
         <View style={styles.inputContainer}>
           <BodyText style={styles.label}>Duration</BodyText>
-          {
-            // TODO - Needs dropdown
-            // <TextInput style={styles.input} />
-          }
+          <TextInput style={styles.input} value={duration} onChangeText={setDuration}/>
         </View>
 
         <View style={styles.inputContainer}>
           <BodyText style={styles.label}>Ingredients</BodyText>
-          {
-            // TODO - Needs text input with list (Add & Delete)
-            // <TextInput style={styles.input} />
-          }
+          <ModifiableItemList items={ingredients} />
+          <TextInput
+            style={styles.input}
+            onChangeText={(text) => {
+              setIngredients([...ingredients, { key: ingredients.length + 1, value: text }])
+            }}
+          />
         </View>
 
         <View style={styles.inputContainer}>
           <BodyText style={styles.label}>Steps</BodyText>
-          {
-            // TODO - Needs text input with list (Add & Delete)
-            // <TextInput style={styles.input} />
-          }
+          <ModifiableItemList items={steps} />
+          <TextInput
+            style={styles.input}
+            onChangeText={(text) => {
+              setSteps([...steps, { key: steps.length + 1, value: text }])
+            }}
+          />
         </View>
 
         <View style={styles.inputContainer}>
@@ -149,6 +153,17 @@ const NewMealScreen = props => {
 
       </View>
     </ScrollView>
+  )
+}
+
+const ModifiableItemList = ({items, onDeleteItem}) => {
+  return(
+    <View style={styles.modifiableListContainer}>
+      <FlatList
+        data={items}
+        renderItem={({ item }) => <BodyText style={styles.listDisabledInput}>{item}</BodyText>}
+      />
+    </View>
   )
 }
 
