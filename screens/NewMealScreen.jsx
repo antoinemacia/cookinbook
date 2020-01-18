@@ -17,10 +17,6 @@ const NewMealScreen = props => {
   const [vegan, setVegan] = useState(meal ? meal.vegan : false)
   const [vegetarian, setVegetarian] = useState(meal ? meal.vegetarian : false)
 
-  const handleAddIngredient = (ingredient) => {
-    setIngredients([...ingredients, ingredient])
-  }
-
   const saveMeal = useCallback(() => {
     // TODO: Add hooks to save form state and
     // TODO: Pass form data to Redux action
@@ -52,6 +48,11 @@ const NewMealScreen = props => {
         <View style={styles.inputContainer}>
           <BodyText style={styles.label}>Categories</BodyText>
           <ModifiableItemList items={categories} />
+          {
+            // TODO add function to delete from list
+            // TODO extract to compoonent of its own
+            // TODO style like tags for category
+          }
           <Picker
             selectedValue={categories}
             style={styles.input}
