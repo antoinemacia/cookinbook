@@ -100,6 +100,7 @@ const NewMealScreen = props => {
         <View style={styles.inputContainer}>
           <BodyText style={styles.label}>Ingredients</BodyText>
           {
+            // TODO - Read this. https://goshakkk.name/array-form-inputs/
             //           <ModifiableItemList items={ingredients} />
             // Add multi line text input
           }
