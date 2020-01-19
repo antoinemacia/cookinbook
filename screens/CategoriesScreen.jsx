@@ -31,7 +31,7 @@ const Category = props => {
         })
       }}>
       <View style={{...styles.categoryGrid, ...{backgroundColor: props.item.color}}}>
-        <BodyText style={styles.categoryTitle}>{props.item.title}</BodyText>
+        <BodyText style={styles.categoryTitle}>{props.item.name}</BodyText>
       </View>
     </TouchableOpacity>
   )

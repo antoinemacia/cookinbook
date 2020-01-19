@@ -1,15 +1,18 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { ScrollView, View, StyleSheet, TextInput, Switch, Picker, Image } from 'react-native';
+import { ScrollView, View, StyleSheet, TextInput, Switch, Picker, FlatList } from 'react-native';
 import BodyText from '../components/BodyText';
+import { CATEGORIES } from '../data/categories';
+import MultiSelect from 'react-native-multiple-select';
+import Colors from '../constants/Colors';
 
 const NewMealScreen = props => {
   const meal = props.navigation.getParam('meal');
 
-  const [title, setTitle] = useState(meal ? meal.title : false)
+  const [title, setTitle] = useState(meal ? meal.title : "")
   const [categories, setCategories] = useState(meal ? meal.categories : [])
   const [affordability, setAffordability] = useState(meal ? meal.affordability : "")
   const [complexity, setComplexity] = useState(meal ? meal.complexity : "")
-  const [duration, setDuration] = useState(meal ? meal.duration : 0)
+  const [duration, setDuration] = useState(meal ? meal.duration : "")
   const [ingredients, setIngredients] = useState(meal ? meal.ingredients : [])
   const [steps, setSteps] = useState(meal ? meal.steps : [])
   const [glutenFree, setGlutenFree] = useState(meal ? meal.glutenFree : false)
@@ -47,27 +50,23 @@ const NewMealScreen = props => {
 
         <View style={styles.inputContainer}>
           <BodyText style={styles.label}>Categories</BodyText>
-          <ModifiableItemList items={categories} />
           {
-            // TODO add function to delete from list
-            // TODO extract to compoonent of its own
             // TODO style like tags for category
           }
-          <Picker
-            selectedValue={categories}
-            style={styles.input}
-            onValueChange={(value) => { setCategories([...categories, { key: categories.length + 1, value: value }])}}>
-            <Picker.Item label="Italian" value="c1" />
-            <Picker.Item label="Quick & Easy" value="c2" />
-            <Picker.Item label="Hamburgers" value="c3" />
-            <Picker.Item label="German" value="c4" />
-            <Picker.Item label="Light & Lovely" value="c5" />
-            <Picker.Item label="Exotic" value="c6" />
-            <Picker.Item label="Breakfast" value="c7" />
-            <Picker.Item label="Asian" value="c8" />
-            <Picker.Item label="French" value="c9" />
-            <Picker.Item label="Summer" value="c10" />
-          </Picker>
+          <MultiSelect
+            items={CATEGORIES}
+            uniqueKey="id"
+            onSelectedItemsChange={setCategories}
+            selectedItems={categories}
+            selectText="Pick Categories"
+            selectText="Pick Items"
+            searchInputPlaceholderText="Search Items..."
+            tagRemoveIconColor="#CCC"
+            tagBorderColor="#CCC"
+            itemTextColor="#000"
+            submitButtonColor="#CCC"
+            submitButtonText="Submit"
+          />
         </View>
         <View style={styles.inputContainer}>
           <BodyText style={styles.label}>Affordability</BodyText>
@@ -100,24 +99,18 @@ const NewMealScreen = props => {
 
         <View style={styles.inputContainer}>
           <BodyText style={styles.label}>Ingredients</BodyText>
-          <ModifiableItemList items={ingredients} />
-          <TextInput
-            style={styles.input}
-            onChangeText={(text) => {
-              setIngredients([...ingredients, { key: ingredients.length + 1, value: text }])
-            }}
-          />
+          {
+            //           <ModifiableItemList items={ingredients} />
+            // Add multi line text input
+          }
         </View>
 
         <View style={styles.inputContainer}>
           <BodyText style={styles.label}>Steps</BodyText>
-          <ModifiableItemList items={steps} />
-          <TextInput
-            style={styles.input}
-            onChangeText={(text) => {
-              setSteps([...steps, { key: steps.length + 1, value: text }])
-            }}
-          />
+          {
+            // <ModifiableItemList items={steps} />
+            // Add multi line text input
+          }
         </View>
 
         <View style={styles.inputContainer}>

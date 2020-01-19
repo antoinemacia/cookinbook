@@ -30,7 +30,7 @@ CategoryMealsScreen.navigationOptions = navigationData => {
   const category = CATEGORIES.find(cat => catId === cat.id)
 
   return {
-    headerTitle: category.title
+    headerTitle: category.name
   }
 }
 
