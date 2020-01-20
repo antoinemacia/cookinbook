@@ -4,6 +4,7 @@ import BodyText from '../components/BodyText';
 import { CATEGORIES } from '../data/categories';
 import MultiSelect from 'react-native-multiple-select';
 import Colors from '../constants/Colors';
+import MultiTextInput from '../components/MultiTextInput'
 
 const NewMealScreen = props => {
   const meal = props.navigation.getParam('meal');
@@ -19,6 +20,22 @@ const NewMealScreen = props => {
   const [lactoseFree, setLactoseFree] = useState(meal ? meal.lactoseFree : false)
   const [vegan, setVegan] = useState(meal ? meal.vegan : false)
   const [vegetarian, setVegetarian] = useState(meal ? meal.vegetarian : false)
+
+  handleSaveStep = (step) => {
+    setSteps([...steps, step])
+  }
+
+  handleDeleteStep = (step) => {
+    setSteps(steps.filter((_, idx) => steps.indexOf(step) == idx))
+  }
+  
+  handleSaveIngredient = (ingredient) => {
+    setSteps([...ingredients, ingredient])
+  }
+
+  handleDeleteIngredient = (ingredient) => {
+    setSteps(ingredients.filter((_, idx) => ingredients.indexOf(ingredient) == idx))
+  }
 
   const saveMeal = useCallback(() => {
     // TODO: Add hooks to save form state and
@@ -50,9 +67,6 @@ const NewMealScreen = props => {
 
         <View style={styles.inputContainer}>
           <BodyText style={styles.label}>Categories</BodyText>
-          {
-            // TODO style like tags for category
-          }
           <MultiSelect
             items={CATEGORIES}
             uniqueKey="id"
@@ -99,19 +113,18 @@ const NewMealScreen = props => {
 
         <View style={styles.inputContainer}>
           <BodyText style={styles.label}>Ingredients</BodyText>
-          {
-            // TODO - Read this. https://goshakkk.name/array-form-inputs/
-            //           <ModifiableItemList items={ingredients} />
-            // Add multi line text input
-          }
+          <MultiTextInput
+            items={ingredients}
+            onDeleteItem={this.handleDeleteIngredient}
+            onSaveItem={this.handleSaveIngredient} />
         </View>
 
         <View style={styles.inputContainer}>
           <BodyText style={styles.label}>Steps</BodyText>
-          {
-            // <ModifiableItemList items={steps} />
-            // Add multi line text input
-          }
+          <MultiTextInput
+            items={steps}
+            onDeleteItem={this.handleDeleteStep}
+            onSaveItem={this.handleSaveStep} />
         </View>
 
         <View style={styles.inputContainer}>
@@ -148,17 +161,6 @@ const NewMealScreen = props => {
 
       </View>
     </ScrollView>
-  )
-}
-
-const ModifiableItemList = ({items, onDeleteItem}) => {
-  return(
-    <View style={styles.modifiableListContainer}>
-      <FlatList
-        data={items}
-        renderItem={({ item }) => <BodyText style={styles.listDisabledInput}>{item}</BodyText>}
-      />
-    </View>
   )
 }
 
