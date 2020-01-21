@@ -25,7 +25,7 @@ const ModifiableItemList = ({ items, onDeleteItem }) => {
         data={items}
         renderItem={({ item }) =>
           <View style={styles.multiInputDelete}>
-            <BodyText style={styles.listDisabledInput}>{item}</BodyText>
+            <BodyText style={styles.listDisabledText}>{item}</BodyText>
             <Button style={styles.multiInputButton} onPress={() => onDeleteItem(item)}>
               <Icon name="ios-delete" size={30} color="#900" />
             </Button>
@@ -37,8 +37,17 @@ const ModifiableItemList = ({ items, onDeleteItem }) => {
 }
 
 const styles = StyleSheet.create({
-  text: {
-    fontFamily: 'open-sans'
+  modifiableListContainer: {
+    padding: 10
+  },
+  multiInputDelete: {
+
+  },
+  listDisabledText: {
+
+  },
+  multiInputButton: {
+
   }
 })
 
