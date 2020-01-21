@@ -1,13 +1,16 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { ScrollView, View, StyleSheet, TextInput, Switch, Picker, FlatList } from 'react-native';
+import { ScrollView, View, StyleSheet, TextInput, Switch, Picker } from 'react-native';
 import BodyText from '../components/BodyText';
 import { CATEGORIES } from '../data/categories';
 import MultiSelect from 'react-native-multiple-select';
 import Colors from '../constants/Colors';
 import MultiTextInput from '../components/MultiTextInput'
+import { useDispatch } from 'react-redux'
+import { createMeal } from '../store/actions/meals';
 
 const NewMealScreen = props => {
   const meal = props.navigation.getParam('meal');
+  const dispatch = useDispatch();
 
   const [title, setTitle] = useState(meal ? meal.title : "")
   const [categories, setCategories] = useState(meal ? meal.categories : [])
@@ -28,7 +31,7 @@ const NewMealScreen = props => {
   handleDeleteStep = (step) => {
     setSteps(steps.filter((_, idx) => steps.indexOf(step) == idx))
   }
-  
+
   handleSaveIngredient = (ingredient) => {
     setSteps([...ingredients, ingredient])
   }
@@ -37,11 +40,25 @@ const NewMealScreen = props => {
     setSteps(ingredients.filter((_, idx) => ingredients.indexOf(ingredient) == idx))
   }
 
+  const mealData = [
+    title,
+    categoryIds,
+    affordability,
+    complexity,
+    imageUrl,
+    duration,
+    ingredients,
+    steps,
+    isGlutenFree,
+    isVegan,
+    isVegetarian,
+    isLactoseFree
+  ]
+
   const saveMeal = useCallback(() => {
-    // TODO: Add hooks to save form state and
-    // TODO: Pass form data to Redux action
-    // TODO: Success message
-  }, [])
+    const mealId = new Date().toString()
+    dispatch(createMeal([mealId, ...mealData]))
+  }, mealData)
 
   useEffect(() => {
     props.navigation.setParams({

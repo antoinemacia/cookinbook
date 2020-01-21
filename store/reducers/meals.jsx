@@ -1,6 +1,5 @@
 import { MEALS } from '../../data/meals';
-import { TOGGLE_FAVORITE } from '../actions/meals';
-import { SET_FILTERS } from '../actions/meals';
+import { TOGGLE_FAVORITE, SET_FILTERS, CREATE_MEAL } from '../actions/meals';
 
 const initialState = {
   meals: MEALS,
@@ -10,6 +9,15 @@ const initialState = {
 
 const mealsReducer = (state = initialState, action) => {
   switch(action.type) {
+    case CREATE_MEAL:
+      const mealData = action.mealData
+      const meal = new Meal(mealData)
+      if (meal) {
+        return {
+          ...state,
+          meals: [...state.meals, meal]
+        }
+      }
     case TOGGLE_FAVORITE:
       const mealId = action.mealId
       const favoriteMeals = state.favoriteMeals
