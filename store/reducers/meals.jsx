@@ -11,8 +11,8 @@ const mealsReducer = (state = initialState, action) => {
   switch(action.type) {
     case CREATE_MEAL:
       const mealData = action.mealData
-      const meal = new Meal(mealData)
-      if (meal) {
+      const newMeal = new Meal(mealData)
+      if (newMeal) {
         return {
           ...state,
           meals: [...state.meals, meal]

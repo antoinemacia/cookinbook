@@ -42,23 +42,23 @@ const NewMealScreen = props => {
 
   const mealData = [
     title,
-    categoryIds,
+    categories,
     affordability,
     complexity,
-    imageUrl,
+    "", // Image URL
     duration,
     ingredients,
     steps,
-    isGlutenFree,
-    isVegan,
-    isVegetarian,
-    isLactoseFree
+    glutenFree,
+    vegan,
+    vegetarian,
+    lactoseFree
   ]
 
   const saveMeal = useCallback(() => {
     const mealId = new Date().toString()
     dispatch(createMeal([mealId, ...mealData]))
-  }, mealData)
+  }, [])
 
   useEffect(() => {
     props.navigation.setParams({

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { View, StyleSheet, TextInput, FlatList, Button } from 'react-native';
+import { View, StyleSheet, TextInput, FlatList, TouchableOpacity } from 'react-native';
+import BodyText from './BodyText';
 
 const MultiTextInput = props => {
 
@@ -11,9 +11,11 @@ const MultiTextInput = props => {
     <View style={styles.multiInput}>
       <ModifiableItemList items={props.items} onDeleteItem={props.onDeleteItem} />
       <TextInput style={styles.input} value={currentTextEdit} onChangeText={setCurrentTextEdit} />
-      <Button style={styles.multiInputButton} onPress={() => props.onSaveItem(currentTextEdit)}>
+      <TouchableOpacity
+        style={styles.multiInputButton}
+        onPress={() => props.onSaveItem(currentTextEdit)}>
         <Icon name="ios-add" size={30} color="#900" />
-      </Button>
+      </TouchableOpacity>
     </View>
   )
 }
@@ -24,11 +26,13 @@ const ModifiableItemList = ({ items, onDeleteItem }) => {
       <FlatList
         data={items}
         renderItem={({ item }) =>
-          <View style={styles.multiInputDelete}>
+          <View style={styles.multiInputDelete} key={item}>
             <BodyText style={styles.listDisabledText}>{item}</BodyText>
-            <Button style={styles.multiInputButton} onPress={() => onDeleteItem(item)}>
-              <Icon name="ios-delete" size={30} color="#900" />
-            </Button>
+            <TouchableOpacity
+              style={styles.multiInputButton}
+              onPress={() => onDeleteItem(item)}>
+              <Icon name="ios-close-circle" size={30} color="#900" />
+            </TouchableOpacity>
           </View>
         }
       />
