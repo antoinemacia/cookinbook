@@ -15,6 +15,20 @@ const MealDetailScreen = props => {
     dispatch(toggleFavorite(meal))
   }, [dispatch, meal])
 
+  // NOT IN FUNCTION/HERE FOR LEARNING PURPOSES
+
+  // This is used to update the screen whenever needed (as otherwise the data will
+  // be loaded on app start only)
+  // useEffect(() => {
+  //   const updateScreen = props.navigation.addEventListener(
+  //     'willFocus',
+  //     loadProductsFromServer
+  //   )
+  //   return () => {
+  //     updateScreen.remove()
+  //   }
+  // }, [loadProductsFromServer])
+
   useEffect(() => {
     props.navigation.setParams({
       toggleFav: toggleFavoriteHandler,
